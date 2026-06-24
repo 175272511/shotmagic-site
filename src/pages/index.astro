@@ -1,0 +1,615 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const features = [
+  {
+    icon: '🖥️',
+    title: '11 device mockups',
+    body: 'MacBook Pro, iPhone 15 Pro, iPad, Pixel 8, Surface, browser windows, and more — all crisp vector frames.',
+  },
+  {
+    icon: '✏️',
+    title: 'Rich annotations',
+    body: 'Text, arrows, lines, rectangles, ellipses, freehand. Move, resize, layer — like a tiny Figma for screenshots.',
+  },
+  {
+    icon: '🎲',
+    title: '3D tilt perspective',
+    body: 'Dual-axis rotation + perspective + scale, rendered in Canvas. No WebGL bloat, no dependency hell.',
+  },
+  {
+    icon: '🌈',
+    title: '100+ backgrounds',
+    body: '50 abstract gradients + 50 patterns built in. Upload your own image when you need brand colors.',
+  },
+  {
+    icon: '📐',
+    title: '8 social presets',
+    body: 'Twitter post, Instagram square/story, Facebook cover, Product Hunt, Dribbble, Open Graph — one click resize.',
+  },
+  {
+    icon: '🔒',
+    title: 'Fully local — no upload',
+    body: 'Everything runs in your browser. No account, no server, no telemetry. Your screenshots never leave your laptop.',
+  },
+];
+
+const useCases = [
+  {
+    label: 'Content creators',
+    body: 'Drop a raw screenshot into a clean device frame, add a punchy headline, export to Twitter card size. Done in 20 seconds.',
+  },
+  {
+    label: 'Product marketers',
+    body: 'Build a feature gallery for your landing page without firing up Figma. Consistent device frames, consistent backgrounds.',
+  },
+  {
+    label: 'Indie devs',
+    body: 'Ship better changelog screenshots, App Store listings, and OSS README hero images — without a designer.',
+  },
+  {
+    label: 'Tech writers',
+    body: 'Annotate UI flows for tutorials. Arrows that don\'t look like 2010 PowerPoint.',
+  },
+];
+
+const faqs = [
+  {
+    q: 'Is it really free?',
+    a: 'Yes — fully free, no upsell. The whole tool runs in your browser using your machine\'s CPU, so there\'s no server cost to fund.',
+  },
+  {
+    q: 'Do you upload my screenshots?',
+    a: 'No. Everything happens in an offscreen Chrome document on your device. There is no backend, no analytics, no telemetry pinging home.',
+  },
+  {
+    q: 'Why not Chrome Web Store?',
+    a: 'We\'re submitting it. Until approval lands, install the .zip below in Developer Mode — same code, same security boundary.',
+  },
+  {
+    q: 'Will it work on Firefox / Edge / Brave?',
+    a: 'Edge and Brave (Chromium-based) work today via Developer Mode load. A proper Firefox port is on the roadmap.',
+  },
+  {
+    q: 'Can I contribute?',
+    a: 'Yes — source is on GitHub. PRs for new device mockups, background patterns, and annotation tools welcome.',
+  },
+];
+---
+
+<Layout>
+  <header class="nav">
+    <div class="container nav-inner">
+      <a href="/" class="brand">
+        <span class="brand-mark">✨</span>
+        <span class="brand-name">ShotMagic</span>
+      </a>
+      <nav class="nav-links">
+        <a href="#features">Features</a>
+        <a href="#use-cases">Use cases</a>
+        <a href="#faq">FAQ</a>
+        <a href="https://github.com/175272511/shotmagic-site" target="_blank" rel="noopener">GitHub</a>
+      </nav>
+      <a class="btn btn-primary" href="#install">Install free</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero container">
+      <div class="hero-text">
+        <p class="eyebrow">Chrome extension · 100% local · MIT</p>
+        <h1>
+          Turn raw screenshots into
+          <span class="grad">scroll-stopping visuals</span>
+        </h1>
+        <p class="lede">
+          Capture, mockup, annotate, and export — without leaving the tab.
+          ShotMagic gives content creators a Figma-grade polish in one click,
+          with zero uploads and zero login.
+        </p>
+        <div class="cta-row">
+          <a class="btn btn-primary btn-lg" href="#install">Install free</a>
+          <a class="btn btn-ghost btn-lg" href="#demo">See it in action</a>
+        </div>
+        <p class="micro">
+          Works on Chrome 109+ · Edge · Brave · No account · No tracking
+        </p>
+      </div>
+      <div class="hero-visual" aria-hidden="true">
+        <div class="mock-frame">
+          <div class="mock-bar">
+            <span></span><span></span><span></span>
+          </div>
+          <div class="mock-body">
+            <div class="mock-block mock-block-1"></div>
+            <div class="mock-block mock-block-2"></div>
+            <div class="mock-block mock-block-3"></div>
+          </div>
+        </div>
+        <div class="floating floating-1">🖼️ Mockup</div>
+        <div class="floating floating-2">✏️ Annotate</div>
+        <div class="floating floating-3">🌈 Background</div>
+      </div>
+    </section>
+
+    <section id="features" class="container section">
+      <h2 class="section-title">Everything you need to make a screenshot worth sharing</h2>
+      <p class="section-sub">
+        Six tools that cover 95% of what designers, creators, and devs reach for —
+        wired into one Chrome popup.
+      </p>
+      <div class="grid grid-3">
+        {features.map((f) => (
+          <div class="card">
+            <div class="card-icon">{f.icon}</div>
+            <h3>{f.title}</h3>
+            <p>{f.body}</p>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <section id="demo" class="container section">
+      <h2 class="section-title">From raw to ready in three clicks</h2>
+      <div class="steps">
+        <div class="step">
+          <div class="step-num">1</div>
+          <h3>Capture</h3>
+          <p>Hit the toolbar icon. Grab the visible tab or a region.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <h3>Beautify</h3>
+          <p>Pick a device, drop in a background, annotate. Live preview.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <h3>Export</h3>
+          <p>Copy to clipboard or download as PNG, sized for any social preset.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="use-cases" class="container section">
+      <h2 class="section-title">Built for people who ship every day</h2>
+      <div class="grid grid-2">
+        {useCases.map((u) => (
+          <div class="card">
+            <h3>{u.label}</h3>
+            <p>{u.body}</p>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <section id="install" class="container section install">
+      <div class="install-card">
+        <h2>Install ShotMagic</h2>
+        <p class="lede" style="text-align: center;">
+          Chrome Web Store listing is in review. For now, install the
+          unpacked extension — takes 30 seconds.
+        </p>
+        <ol class="install-steps">
+          <li>
+            <a class="btn btn-primary" href="/shotmagic-latest.zip" download>
+              ⬇ Download ShotMagic (.zip)
+            </a>
+          </li>
+          <li>Unzip anywhere on your machine.</li>
+          <li>Open <code>chrome://extensions</code> in Chrome.</li>
+          <li>Toggle <strong>Developer mode</strong> (top-right).</li>
+          <li>Click <strong>Load unpacked</strong> and select the unzipped folder.</li>
+          <li>Pin ShotMagic to your toolbar. Done. 🎉</li>
+        </ol>
+        <p class="micro" style="text-align: center;">
+          The same .zip you'd get from the Web Store, just signed by yourself.
+          Source on <a href="https://github.com/175272511/shotmagic-site">GitHub</a>.
+        </p>
+      </div>
+    </section>
+
+    <section id="faq" class="container section">
+      <h2 class="section-title">FAQ</h2>
+      <div class="faq-list">
+        {faqs.map((item) => (
+          <details class="faq-item">
+            <summary>{item.q}</summary>
+            <p>{item.a}</p>
+          </details>
+        ))}
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div>
+        <span class="brand-mark">✨</span>
+        <strong>ShotMagic</strong>
+        <span class="text-dim">— beautify your screenshots, locally.</span>
+      </div>
+      <div class="footer-links">
+        <a href="#features">Features</a>
+        <a href="#faq">FAQ</a>
+        <a href="https://github.com/175272511/shotmagic-site" target="_blank" rel="noopener">GitHub</a>
+        <a href="mailto:f175272511@gmail.com">Contact</a>
+      </div>
+    </div>
+  </footer>
+</Layout>
+
+<style>
+  .container {
+    max-width: var(--max-w);
+    margin: 0 auto;
+    padding: 0 24px;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ── Nav ─────────────────────────────────────── */
+  .nav {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    background: rgba(10, 10, 15, 0.7);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    height: 64px;
+  }
+  .brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+  }
+  .brand-mark { font-size: 18px; }
+  .brand-name { font-size: 17px; }
+  .nav-links {
+    display: flex;
+    gap: 28px;
+    font-size: 14px;
+    color: var(--text-dim);
+  }
+  @media (max-width: 720px) {
+    .nav-links { display: none; }
+  }
+
+  /* ── Buttons ─────────────────────────────────── */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 18px;
+    border-radius: 10px;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 1;
+    border: 1px solid transparent;
+    cursor: pointer;
+    transition: transform 0.12s ease, box-shadow 0.18s ease, background 0.18s;
+    text-decoration: none;
+  }
+  .btn-lg { padding: 14px 24px; font-size: 15px; }
+  .btn-primary {
+    background: linear-gradient(135deg, var(--accent), var(--accent-2));
+    color: #0a0a0f;
+  }
+  .btn-primary:hover {
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-glow);
+    color: #0a0a0f;
+  }
+  .btn-ghost {
+    background: transparent;
+    color: var(--text);
+    border-color: var(--border);
+  }
+  .btn-ghost:hover { border-color: var(--accent); color: var(--accent); }
+
+  /* ── Hero ────────────────────────────────────── */
+  .hero {
+    padding: 80px 24px 60px;
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    gap: 60px;
+    align-items: center;
+  }
+  @media (max-width: 900px) {
+    .hero { grid-template-columns: 1fr; padding: 56px 24px 40px; }
+  }
+  .eyebrow {
+    font-size: 12px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin: 0 0 18px;
+  }
+  h1 {
+    font-size: clamp(36px, 5.6vw, 60px);
+    line-height: 1.04;
+    letter-spacing: -0.025em;
+    font-weight: 800;
+    margin: 0 0 20px;
+  }
+  .grad {
+    background: linear-gradient(135deg, var(--accent), var(--accent-2));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .lede {
+    font-size: 18px;
+    color: var(--text-dim);
+    margin: 0 0 28px;
+    max-width: 52ch;
+  }
+  .cta-row {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 18px;
+  }
+  .micro {
+    font-size: 13px;
+    color: var(--text-dim);
+    margin: 0;
+  }
+
+  /* ── Hero visual (CSS-only mockup placeholder) ── */
+  .hero-visual {
+    position: relative;
+    aspect-ratio: 4 / 3;
+  }
+  .mock-frame {
+    position: absolute;
+    inset: 12% 8% 12% 8%;
+    background: linear-gradient(180deg, #1a1a26, #0e0e16);
+    border-radius: 14px;
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow-glow);
+    overflow: hidden;
+    transform: rotate(-2deg) perspective(900px) rotateY(8deg);
+  }
+  .mock-bar {
+    height: 28px;
+    background: #0f0f18;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding-left: 14px;
+  }
+  .mock-bar span {
+    width: 10px; height: 10px; border-radius: 50%;
+    background: #2a2a3a;
+  }
+  .mock-bar span:first-child { background: #ff5f57; }
+  .mock-bar span:nth-child(2) { background: #febc2e; }
+  .mock-bar span:nth-child(3) { background: #28c840; }
+  .mock-body {
+    padding: 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .mock-block {
+    border-radius: 8px;
+    background: linear-gradient(90deg, rgba(192, 132, 252, 0.5), rgba(244, 114, 182, 0.5));
+  }
+  .mock-block-1 { height: 28px; width: 65%; }
+  .mock-block-2 { height: 80px; width: 100%; opacity: 0.45; }
+  .mock-block-3 { height: 14px; width: 40%; opacity: 0.55; }
+
+  .floating {
+    position: absolute;
+    padding: 8px 14px;
+    background: rgba(17, 17, 26, 0.85);
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    font-size: 13px;
+    font-weight: 500;
+    backdrop-filter: blur(8px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+  }
+  .floating-1 { top: 6%; right: -2%; }
+  .floating-2 { bottom: 16%; left: -4%; }
+  .floating-3 { bottom: -2%; right: 18%; }
+
+  /* ── Sections ───────────────────────────────── */
+  .section {
+    padding: 80px 24px;
+  }
+  .section-title {
+    font-size: clamp(28px, 3.4vw, 38px);
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+    margin: 0 0 12px;
+    text-align: center;
+    font-weight: 700;
+  }
+  .section-sub {
+    color: var(--text-dim);
+    text-align: center;
+    margin: 0 auto 48px;
+    max-width: 60ch;
+    font-size: 16px;
+  }
+
+  .grid {
+    display: grid;
+    gap: 20px;
+  }
+  .grid-3 { grid-template-columns: repeat(3, 1fr); }
+  .grid-2 { grid-template-columns: repeat(2, 1fr); }
+  @media (max-width: 900px) {
+    .grid-3 { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 620px) {
+    .grid-3, .grid-2 { grid-template-columns: 1fr; }
+  }
+
+  .card {
+    background: var(--bg-elev);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 28px;
+    transition: border-color 0.18s, transform 0.18s;
+  }
+  .card:hover {
+    border-color: var(--accent);
+    transform: translateY(-2px);
+  }
+  .card h3 {
+    margin: 0 0 8px;
+    font-size: 18px;
+    letter-spacing: -0.01em;
+  }
+  .card p {
+    margin: 0;
+    color: var(--text-dim);
+    font-size: 14.5px;
+    line-height: 1.6;
+  }
+  .card-icon {
+    font-size: 28px;
+    margin-bottom: 14px;
+  }
+
+  /* ── Steps ──────────────────────────────────── */
+  .steps {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+  @media (max-width: 760px) {
+    .steps { grid-template-columns: 1fr; }
+  }
+  .step {
+    background: var(--bg-elev);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 32px 28px;
+    position: relative;
+  }
+  .step h3 { margin: 16px 0 8px; font-size: 18px; }
+  .step p { margin: 0; color: var(--text-dim); font-size: 14.5px; }
+  .step-num {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--accent), var(--accent-2));
+    color: #0a0a0f;
+    font-weight: 700;
+    font-size: 15px;
+  }
+
+  /* ── Install ─────────────────────────────────── */
+  .install { padding-top: 40px; }
+  .install-card {
+    background: var(--bg-elev);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 48px clamp(24px, 5vw, 64px);
+    box-shadow: var(--shadow-glow);
+  }
+  .install-card h2 {
+    margin: 0 0 12px;
+    font-size: clamp(28px, 3.4vw, 36px);
+    text-align: center;
+    letter-spacing: -0.02em;
+  }
+  .install-steps {
+    list-style: decimal inside;
+    counter-reset: none;
+    padding: 0;
+    margin: 32px auto;
+    max-width: 480px;
+    color: var(--text-dim);
+    line-height: 2.1;
+    font-size: 15px;
+  }
+  .install-steps li::marker { color: var(--accent); font-weight: 700; }
+  .install-steps li:first-child {
+    list-style: none;
+    text-align: center;
+    margin-bottom: 16px;
+  }
+  .install-steps code {
+    background: #0a0a14;
+    padding: 2px 8px;
+    border-radius: 5px;
+    font-size: 13.5px;
+    font-family: 'JetBrains Mono', 'SF Mono', Menlo, monospace;
+    color: var(--accent);
+  }
+
+  /* ── FAQ ─────────────────────────────────────── */
+  .faq-list {
+    max-width: 720px;
+    margin: 0 auto;
+  }
+  .faq-item {
+    background: var(--bg-elev);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    margin-bottom: 10px;
+    padding: 4px 24px;
+  }
+  .faq-item[open] { border-color: var(--accent); }
+  .faq-item summary {
+    cursor: pointer;
+    padding: 16px 0;
+    font-weight: 600;
+    list-style: none;
+    position: relative;
+  }
+  .faq-item summary::-webkit-details-marker { display: none; }
+  .faq-item summary::after {
+    content: '+';
+    position: absolute;
+    right: 0;
+    color: var(--accent);
+    font-size: 22px;
+    line-height: 1;
+    transition: transform 0.18s;
+  }
+  .faq-item[open] summary::after { content: '−'; }
+  .faq-item p {
+    color: var(--text-dim);
+    margin: 0 0 16px;
+    font-size: 14.5px;
+  }
+
+  /* ── Footer ─────────────────────────────────── */
+  .footer {
+    border-top: 1px solid var(--border);
+    padding: 40px 0;
+    margin-top: 40px;
+  }
+  .footer-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    font-size: 14px;
+    color: var(--text-dim);
+  }
+  .footer-links {
+    display: flex;
+    gap: 24px;
+  }
+  .text-dim { color: var(--text-dim); }
+</style>
