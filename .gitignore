@@ -5,3 +5,6 @@ dist
 .env
 .env.local
 *.log
+
+# 插件打包产物,本地构建 + 直传 CF Pages,不进仓库
+public/shotmagic-latest.zip
