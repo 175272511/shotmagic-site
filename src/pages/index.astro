@@ -114,6 +114,26 @@ const faqs = [
         <p class="micro">
           Works on Chrome 109+ · Edge · Brave · No account · No tracking
         </p>
+
+        <div class="waitlist" id="waitlist">
+          <p class="waitlist-pitch">
+            <span class="waitlist-tag">PRO</span>
+            Coming soon — AI one-click beautify, cloud sync, team libraries.
+            Get notified when it ships.
+          </p>
+          <form class="waitlist-form" id="waitlist-form" novalidate>
+            <input
+              type="email"
+              name="email"
+              required
+              placeholder="you@example.com"
+              autocomplete="email"
+              aria-label="Email address for PRO waitlist"
+            />
+            <button type="submit" class="btn btn-primary">Notify me</button>
+          </form>
+          <p class="waitlist-status" id="waitlist-status" role="status" aria-live="polite"></p>
+        </div>
       </div>
       <div class="hero-visual" aria-hidden="true">
         <div class="mock-frame">
@@ -364,6 +384,69 @@ const faqs = [
     margin: 0;
   }
 
+  /* ── Waitlist (hero) ─────────────────────────── */
+  .waitlist {
+    margin-top: 32px;
+    padding-top: 24px;
+    border-top: 1px dashed var(--border);
+    max-width: 460px;
+  }
+  .waitlist-pitch {
+    font-size: 13.5px;
+    color: var(--text-dim);
+    margin: 0 0 14px;
+    line-height: 1.55;
+  }
+  .waitlist-tag {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 5px;
+    margin-right: 8px;
+    background: linear-gradient(135deg, var(--accent), var(--accent-2));
+    color: #0a0a0f;
+    font-size: 10.5px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    vertical-align: 1px;
+  }
+  .waitlist-form {
+    display: flex;
+    gap: 8px;
+  }
+  .waitlist-form input[type='email'] {
+    flex: 1;
+    min-width: 0;
+    padding: 11px 14px;
+    background: var(--bg-elev);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    color: var(--text);
+    font: inherit;
+    font-size: 14px;
+    outline: none;
+    transition: border-color 0.16s;
+  }
+  .waitlist-form input[type='email']:focus {
+    border-color: var(--accent);
+  }
+  .waitlist-form input[type='email']::placeholder {
+    color: #5a5a6d;
+  }
+  .waitlist-form button {
+    padding: 11px 18px;
+    border: none;
+    font-size: 14px;
+    border-radius: 10px;
+  }
+  .waitlist-status {
+    margin: 12px 0 0;
+    min-height: 18px;
+    font-size: 13px;
+    color: var(--text-dim);
+  }
+  .waitlist-status.ok { color: #5eead4; }
+  .waitlist-status.err { color: #fb7185; }
+
   /* ── Hero visual (CSS-only mockup placeholder) ── */
   .hero-visual {
     position: relative;
@@ -613,3 +696,51 @@ const faqs = [
   }
   .text-dim { color: var(--text-dim); }
 </style>
+
+<script>
+  const form = document.getElementById('waitlist-form') as HTMLFormElement | null;
+  const status = document.getElementById('waitlist-status') as HTMLParagraphElement | null;
+  if (form && status) {
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const input = form.elements.namedItem('email') as HTMLInputElement;
+      const button = form.querySelector('button') as HTMLButtonElement;
+      const email = (input.value || '').trim();
+      status.className = 'waitlist-status';
+      if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) {
+        status.textContent = 'Hmm, that email looks off. Try again?';
+        status.classList.add('err');
+        return;
+      }
+      button.disabled = true;
+      const prev = button.textContent;
+      button.textContent = 'Sending…';
+      try {
+        const res = await fetch('/api/subscribe', {
+          method: 'POST',
+          headers: { 'content-type': 'application/json' },
+          body: JSON.stringify({ email, source: 'hero' }),
+        });
+        const data = await res.json().catch(() => ({}));
+        if (res.ok && data.ok) {
+          status.textContent = data.status === 'already_subscribed'
+            ? 'You\'re already on the list — we\'ll be in touch soon.'
+            : '🎉 You\'re in. Watch your inbox.';
+          status.classList.add('ok');
+          input.value = '';
+        } else {
+          status.textContent = data.status === 'invalid_email'
+            ? 'That email looks off. Try again?'
+            : 'Something went sideways. Try again in a sec?';
+          status.classList.add('err');
+        }
+      } catch {
+        status.textContent = 'Network hiccup. Try again?';
+        status.classList.add('err');
+      } finally {
+        button.disabled = false;
+        button.textContent = prev;
+      }
+    });
+  }
+</script>

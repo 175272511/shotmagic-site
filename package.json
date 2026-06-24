@@ -11,5 +11,8 @@
   },
   "dependencies": {
     "astro": "^5.1.0"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^4.20260624.1"
   }
 }
